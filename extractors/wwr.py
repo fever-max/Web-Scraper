@@ -26,5 +26,8 @@ def exfract_wwr_jobs(keyword):
             "company": company.string.replace(",", " "),
             "location": region.string.replace(",", " "),
         }
+        for each in job_data:
+          if job_data[each] != None:
+            job_data[each] = job_data[each].replace(",", " ")
         results.append(job_data)
     return results

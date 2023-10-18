@@ -47,12 +47,16 @@ def extract_indeed_jobs(keyword):
         link = anchor["href"]
         company = job.find("span", class_="companyName")
         location = job.find("div", class_="companyLocation")
+
         job_data = {
             "title": title,
             "link": f"https://kr.indeed.com{link}",
             "company": company.string,
             "location": location.string,
         }
+        for each in job_data:
+          if job_data[each] != None:
+            job_data[each] = job_data[each].replace(",", " ")
         results.append(job_data)
 
   return results

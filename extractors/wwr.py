@@ -21,10 +21,10 @@ def exfract_wwr_jobs(keyword):
         company, kind, region = anchors.find_all("span", class_="company")
         title = anchors.find("span", class_="title")
         job_data = {
-            "title": title.string,
+            "title": title.string.replace(",", " "),
             "link": f"https://weworkremotely.com{link}",
-            "company": company.string,
-            "location": region.string,
+            "company": company.string.replace(",", " "),
+            "location": region.string.replace(",", " "),
         }
         results.append(job_data)
     return results

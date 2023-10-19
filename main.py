@@ -1,17 +1,13 @@
-from extractors.indeed import extract_indeed_jobs
-from extractors.wwr import exfract_wwr_jobs
+from flask import Flask, render_template
 
-keyword = input("What do you want to search for?")
+app = Flask("JopScraper")
 
-indeed = extract_indeed_jobs(keyword)
-wwr = exfract_wwr_jobs(keyword)
-jobs = indeed + wwr
+@app.route("/")
+def home():
+    return render_template("home.html", name="fever")
 
+@app.route("/search")
+def search():
+    return render_template("search.html")
 
-file = open(f"{keyword}.csv", "w", encoding="utf-8-sig")
-file.write("title, location, company, link,\n")
-
-for job in jobs:
-  file.write(f"{job['title']}, {job['location']}, {job['company']}, {job['link']}\n")
-
-file.close()
+app.run("127.0.0.1")

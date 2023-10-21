@@ -27,13 +27,11 @@ def get_page_count(keyword):
 def extract_indeed_jobs(keyword):
   base_url = "https://kr.indeed.com/jobs"
   pages = get_page_count(keyword)
-  print("Found", pages, "pages")
 
   results = []
 
   for page in range(pages):
     final_url = f"{base_url}?q={keyword}&start={page*10}"
-    print("Requesting", final_url)
     browser.get(final_url)
     soup = BeautifulSoup(browser.page_source, "html.parser")
     job_list = soup.find("ul", class_="css-zu9cdh eu4oa1w0")
